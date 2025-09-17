@@ -143,6 +143,15 @@ async function run() {
             body,
           });
           return;
+        } else if (mode === 'append') {
+          const appendBody = comment.body.replace(commentTagPattern, '') + '\n' + body
+
+          await updateComment({
+            ...context.repo,
+            commentId: comment.id,
+            body: appendBody,
+          });
+          return;
         } else if (mode === 'recreate') {
           await deleteComment({
             ...context.repo,
