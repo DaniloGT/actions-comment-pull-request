@@ -30,7 +30,7 @@ jobs:
 ### Comment a file content
 
 Thanks to the `file-path` input, a file content can be commented.
-You can either pass an absolute file-path or a relative one that will be by default retrieved from `GITHUB_WORKSPACE`. 
+You can either pass an absolute file-path or a relative one that will be by default retrieved from `GITHUB_WORKSPACE`.
 (Note that if both a `message` and `file-path` are provided, `message` will take precedence.)
 
 ```yml
@@ -75,7 +75,7 @@ That is particularly useful for manual workflow for instance (`workflow_run`).
 
 Editing an existing comment is also possible thanks to the `comment-tag` input.
 
-Thanks to this parameter, it will be possible to identify your comment and then to upsert on it. 
+Thanks to this parameter, it will be possible to identify your comment and then to upsert on it.
 If the comment is not found at first, it will create a new comment.
 
 _That is particularly interesting while committing multiple times in a PR and that you just want to have the last execution report printed. It avoids flooding the PR._
@@ -110,7 +110,7 @@ Deleting a comment with a specific `comment-tag` is possible with the `mode: del
 
 Deleting an existing comment on job completion is also possible thanks to the `comment-tag` input combined with `mode: delete-on-completion`.
 
-This will delete the comment at the end of the job. 
+This will delete the comment at the end of the job.
 
 ```yml
 ...
@@ -123,7 +123,7 @@ This will delete the comment at the end of the job.
     mode: delete-on-completion
 ```
 
-## Inputs 
+## Inputs
 
 ### Action inputs
 
@@ -135,19 +135,19 @@ This will delete the comment at the end of the job.
 | `reactions` | List of reactions for the comment (comma separated). See https://docs.github.com/en/rest/reactions#reaction-types  | | |
 | `pr-number` | The number of the pull request where to create the comment | | current pull-request/issue number (deduced from context) |
 | `comment-tag` | A tag on your comment that will be used to identify a comment in case of replacement | | |
-| `mode` | Mode that will be used to update comment (upsert/recreate/delete/delete-on-completion) | | upsert |
+| `mode` | Mode that will be used to update comment (append/upsert/recreate/delete/delete-on-completion) | | upsert |
 | `create-if-not-exists` | Whether a comment should be created even if `comment-tag` is not found | | true |
 
 
-## Outputs 
+## Outputs
 
 ### Action outputs
 
-You can get some outputs from this actions : 
+You can get some outputs from this actions :
 
 | Name | Description |
 | --- | --- |
-| `id` | Comment id that was created or updated | 
+| `id` | Comment id that was created or updated |
 | `body` | Comment body |
 | `html-url` | URL of the comment created or updated |
 
@@ -169,12 +169,12 @@ You can get some outputs from this actions :
 
 ## Permissions
 
-Depending on the permissions granted to your token, you may lack some rights. 
-To run successfully, this actions needs at least : 
+Depending on the permissions granted to your token, you may lack some rights.
+To run successfully, this actions needs at least :
 
 ```yaml
-permissions: 
-   pull-requests: write 
+permissions:
+   pull-requests: write
 ```
 
 Add this in case you get `Resource not accessible by integration` error.
@@ -194,3 +194,7 @@ It is handled by `vercel/ncc` compiler.
 ```sh
 $ npm run build
 ```
+
+## This fork
+
+This fork adds the "append" mode. This new mode retrieves the previous comment's body and appends the new message to it.
