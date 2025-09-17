@@ -19,7 +19,7 @@ inputs:
   comment-tag:
     description: 'A tag on your comment that will be used to identify a comment in case of replacement.'
   mode:
-    description: 'Mode that will be used (upsert/recreate/delete/delete-on-completion)'
+    description: 'Mode that will be used (append/upsert/recreate/delete/delete-on-completion)'
     default: 'upsert'
   create-if-not-exists:
     description: 'Whether a comment should be created even if comment-tag is not found.'
