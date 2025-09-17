@@ -143,6 +143,15 @@ async function run() {
             body,
           });
           return;
+        } else if (mode === 'append') {
+          const appendBody = comment?.body?.replace(commentTagPattern, '') + body
+
+          await updateComment({
+            ...context.repo,
+            commentId: comment.id,
+            body: appendBody,
+          });
+          return;
         } else if (mode === 'recreate') {
           await deleteComment({
             ...context.repo,
@@ -165,7 +174,7 @@ async function run() {
           core.debug('Registering this comment to be deleted.');
         } else {
           core.setFailed(
-            `Mode ${mode} is unknown. Please use 'upsert', 'recreate', 'delete' or 'delete-on-completion'.`,
+            `Mode ${mode} is unknown. Please use 'append', 'upsert', 'recreate', 'delete' or 'delete-on-completion'.`,
           );
           return;
         }
