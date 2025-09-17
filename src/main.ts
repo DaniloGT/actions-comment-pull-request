@@ -144,7 +144,7 @@ async function run() {
           });
           return;
         } else if (mode === 'append') {
-          const appendBody = comment?.body?.replace(commentTagPattern, '') + '\n' + body
+          const appendBody = comment?.body?.replace(commentTagPattern, '') + body
 
           await updateComment({
             ...context.repo,
